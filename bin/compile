@@ -10,14 +10,22 @@ if [ -z "$FILE_SIZE" ]; then
 fi
 
 BUILD_DIR=$1
+CACHE_DIR=$2
 
-echo "NUM_FILES=$NUM_FILES"
-echo "FILE_SIZE=$FILE_SIZE"
+if [ -e "$CACHE_DIR/file1.bin" ]; then
+    echo "Resuing files from cache"
+else
+    echo "Generating files"
+    echo "NUM_FILES=$NUM_FILES"
+    echo "FILE_SIZE=$FILE_SIZE"
+    
+    count=$(($FILE_SIZE * 1024))
+    for i in $(seq 1 $NUM_FILES)
+    do
+        echo "Generating $i file"
+        file="$CACHE_DIR/file${i}.bin"
+        dd if=/dev/urandom of=$file bs=1024 count=$count
+    done
+fi
 
-count=$(($FILE_SIZE * 1024))
-for i in $(seq 1 $NUM_FILES)
-do
-   echo "Generating $i file"
-   file="$BUILD_DIR/file${i}.bin"
-   dd if=/dev/urandom of=$file bs=1024 count=$count
-done
+cp -v $CACHE_DIR/file*.bin $BUILD_DIR
