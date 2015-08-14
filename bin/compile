@@ -1,0 +1,23 @@
+#! /bin/sh
+
+if [ -z "$NUM_FILES" ]; then
+    NUM_FILES=1
+fi
+
+# in MB
+if [ -z "$FILE_SIZE" ]; then
+    FILE_SIZE=50
+fi
+
+BUILD_DIR=$1
+
+echo "NUM_FILES=$NUM_FILES"
+echo "FILE_SIZE=$FILE_SIZE"
+
+count=$(($FILE_SIZE * 1024))
+for i in $(seq 1 $NUM_FILES)
+do
+   echo "Generating $i file"
+   file="$BUILD_DIR/file${i}.bin"
+   dd if=/dev/urandom of=$file bs=1024 count=$count
+done
