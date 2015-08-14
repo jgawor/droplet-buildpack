@@ -18,7 +18,9 @@ else
     echo "Generating files"
     echo "NUM_FILES=$NUM_FILES"
     echo "FILE_SIZE=$FILE_SIZE"
-    
+
+    mkdir -p $CACHE_DIR
+
     count=$(($FILE_SIZE * 1024))
     for i in $(seq 1 $NUM_FILES)
     do
