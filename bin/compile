@@ -4,9 +4,9 @@ if [ -z "$NUM_FILES" ]; then
     NUM_FILES=1
 fi
 
-# in MB
+# in KB
 if [ -z "$FILE_SIZE" ]; then
-    FILE_SIZE=50
+    FILE_SIZE=51200
 fi
 
 BUILD_DIR=$1
@@ -21,12 +21,11 @@ else
 
     mkdir -p $CACHE_DIR
 
-    count=$(($FILE_SIZE * 1024))
     for i in $(seq 1 $NUM_FILES)
     do
         echo "Generating $i file"
         file="$CACHE_DIR/file${i}.bin"
-        dd if=/dev/urandom of=$file bs=1024 count=$count
+        dd if=/dev/urandom of=$file bs=1024 count=$FILE_SIZE
     done
 fi
 
