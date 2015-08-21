@@ -29,4 +29,4 @@ else
     done
 fi
 
-/usr/bin/time --portability cp -v $CACHE_DIR/file*.bin $BUILD_DIR
+cp -v $CACHE_DIR/file*.bin $BUILD_DIR
