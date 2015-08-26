@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 
 if [ -z "$NUM_FILES" ]; then
     NUM_FILES=1
@@ -29,4 +29,4 @@ else
     done
 fi
 
-cp -v $CACHE_DIR/file*.bin $BUILD_DIR
+time cp -v $CACHE_DIR/file*.bin $BUILD_DIR
