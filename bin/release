@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
 # bin/release <build-dir>
 
+echo $$ >> $1/release.txt
+
 echo -e "---\ndefault_process_types:\n  web: sleep 10000"
