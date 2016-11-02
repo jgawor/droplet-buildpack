@@ -1,32 +1,9 @@
 #! /bin/bash
 
-if [ -z "$NUM_FILES" ]; then
-    NUM_FILES=1
-fi
-
-# in KB
-if [ -z "$FILE_SIZE" ]; then
-    FILE_SIZE=51200
-fi
 
 BUILD_DIR=$1
 CACHE_DIR=$2
 
-if [ -e "$CACHE_DIR/file1.bin" ]; then
-    echo "Resuing files from cache"
-else
-    echo "Generating files"
-    echo "NUM_FILES=$NUM_FILES"
-    echo "FILE_SIZE=$FILE_SIZE"
+echo $BUILD_DIR
+echo $CACHE_DIR
 
-    mkdir -p $CACHE_DIR
-
-    for i in $(seq 1 $NUM_FILES)
-    do
-        echo "Generating $i file"
-        file="$CACHE_DIR/file${i}.bin"
-        dd if=/dev/urandom of=$file bs=1024 count=$FILE_SIZE
-    done
-fi
-
-time cp -v $CACHE_DIR/file*.bin $BUILD_DIR
